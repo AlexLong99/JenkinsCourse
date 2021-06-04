@@ -27,6 +27,13 @@ pipeline
             steps
             {
                 echo "Testing release ${RELEASE}..."
+                script
+                {
+                    if(Math.random() > 0.5)
+                    {
+                        throw new Execption()
+                    }
+                }
                 writeFile file: 'test-results.txt', text: 'passed'
             }
         }
@@ -36,7 +43,13 @@ pipeline
     {
         success
         {
+            echo "Build succeeded"
             archiveArtifacts 'test-results.txt'
+        }
+
+        failure
+        {
+            echo "Build failed"
         }
     }
 }
