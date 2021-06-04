@@ -18,6 +18,33 @@ pipeline
                 LOG_LEVEL='INFO'
             }
 
+            parallel
+            {
+                stage('linux-arm64')
+                {
+                    steps
+                    {
+                        echo "Building release for ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                    }
+                }
+
+                stage('linux-amd64')
+                {
+                    steps
+                    {
+                        echo "Building release for ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                    }
+                }
+
+                stage('windows-amd64')
+                {
+                    steps
+                    {
+                        echo "Building release for ${RELEASE} for ${STAGE_NAME} with log level ${LOG_LEVEL}..."
+                    }
+                }
+            }
+
             steps
             {
                 echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
